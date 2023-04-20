@@ -25,5 +25,3 @@ plugins:
     opt:
       - allow_merge=true
       - merge_file_name=public
-  - plugin: buf.build/bufbuild/es
-    out: domain
