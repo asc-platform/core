@@ -1,0 +1,99 @@
+syntax = "proto3";
+package account.v1;
+
+import "common/v1/response.proto";
+import "google/api/annotations.proto";
+import "google/api/httpbody.proto";
+import "google/protobuf/empty.proto";
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ADMIN = 1;
+  ROLE_MANAGER = 2;
+  ROLE_LAWYER = 3;
+  ROLE_JUDGE = 4;
+  ROLE_CLIENT = 5;
+}
+
+message Account {
+  message UnspecifiedDetails {}
+  message AdminDetails {}
+  message ManagerDetails {}
+  message LawyerDetails {}
+  message JudgeDetails {}
+  message ClientDetails {}
+
+  message Details {
+    oneof details {
+      UnspecifiedDetails unspecified_details = 1;
+      AdminDetails admin_details = 2;
+      ManagerDetails manager_details = 3;
+      LawyerDetails lawyer_details = 4;
+      JudgeDetails judge_details = 5;
+      ClientDetails client_details = 6;
+    }
+  }
+
+  string email = 1;
+  Role role = 2;
+  Details details = 3;
+}
+
+service AccountsService {
+  rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
+    option (google.api.http) = {get: "/v1/accounts"};
+  }
+
+  rpc GetCurrentAccount(google.protobuf.Empty) returns (GetAccountResponse) {
+    option (google.api.http) = {get: "/v1/accounts/me"};
+  }
+
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
+    option (google.api.http) = {get: "/v1/accounts/{id}"};
+  }
+
+  rpc UpdateAccountDetails(UpdateAccountDetailsRequest) returns (common.v1.BoolResponse) {
+    option (google.api.http) = {
+      put: "/v1/accounts/{id}"
+      body: "request"
+    };
+  }
+
+  rpc DeleteAccount(DeleteAccountRequest) returns (common.v1.BoolResponse) {
+    option (google.api.http) = {delete: "/v1/accounts/{id}"};
+  }
+
+  rpc SetAccountRole(SetAccountRoleRequest) returns (common.v1.BoolResponse) {
+    option (google.api.http) = {
+      post: "/v1/accounts/{id}/role"
+      body: "request"
+    };
+  }
+}
+
+message GetAccountRequest {
+  string id = 1;
+}
+
+message GetAccountResponse {
+  optional Account account = 1;
+}
+
+message ListAccountsRequest {}
+message ListAccountsResponse {
+  repeated Account accounts = 1;
+}
+
+message UpdateAccountDetailsRequest {
+  string id = 1;
+  Account.Details request = 2;
+}
+
+message DeleteAccountRequest {
+  string id = 1;
+}
+
+message SetAccountRoleRequest {
+  string id = 1;
+  Role request = 2;
+}

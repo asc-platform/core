@@ -1,0 +1,41 @@
+syntax = "proto3";
+package file.v1;
+
+import "common/v1/response.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message Metadata {
+  string filename = 1;
+  string extension = 2;
+}
+
+service FileService {
+  rpc UploadFile(stream UploadFileRequest) returns (UploadFileResponse) {
+    option (google.api.http) = {post: "/v1/files"};
+  }
+
+  rpc DownloadFile(DownloadFileRequest) returns (stream DownloadFileResponse) {
+    option (google.api.http) = {get: "/v1/files/{hash}"};
+  }
+}
+
+message UploadFileRequest {
+  oneof request {
+    Metadata metadata = 1;
+    bytes chunk_data = 2;
+  }
+}
+
+message UploadFileResponse {
+  string hash = 1;
+}
+
+message DownloadFileRequest {
+  string hash = 1;
+  string signature = 2;
+}
+
+message DownloadFileResponse {
+  bytes chunk_data = 1;
+}

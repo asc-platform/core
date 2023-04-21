@@ -1,0 +1,17 @@
+syntax = "proto3";
+package transaction.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message Transaction {
+  /* Metadata */
+  message Metadata {
+    string hash = 1;
+    google.protobuf.Timestamp date = 2;
+    string reverted = 3;
+  }
+
+  optional Metadata metadata = 1;
+  string contract = 2;
+  uint32 network = 3;
+}
