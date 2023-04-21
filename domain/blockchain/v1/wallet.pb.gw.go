@@ -202,7 +202,7 @@ func RegisterWalletServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blockchain.v1.WalletService/GetAddress", runtime.WithHTTPPathPattern("/address"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blockchain.v1.WalletService/GetAddress", runtime.WithHTTPPathPattern("/v1/address"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -227,7 +227,7 @@ func RegisterWalletServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blockchain.v1.WalletService/GetMetadata", runtime.WithHTTPPathPattern("/metadata/{id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blockchain.v1.WalletService/GetMetadata", runtime.WithHTTPPathPattern("/v1/metadata/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -252,7 +252,7 @@ func RegisterWalletServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blockchain.v1.WalletService/GetSignature", runtime.WithHTTPPathPattern("/signature/{message}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blockchain.v1.WalletService/GetSignature", runtime.WithHTTPPathPattern("/v1/signature/{message}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -277,7 +277,7 @@ func RegisterWalletServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blockchain.v1.WalletService/SendTransaction", runtime.WithHTTPPathPattern("/transaction"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blockchain.v1.WalletService/SendTransaction", runtime.WithHTTPPathPattern("/v1/transaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -341,7 +341,7 @@ func RegisterWalletServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blockchain.v1.WalletService/GetAddress", runtime.WithHTTPPathPattern("/address"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blockchain.v1.WalletService/GetAddress", runtime.WithHTTPPathPattern("/v1/address"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -363,7 +363,7 @@ func RegisterWalletServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blockchain.v1.WalletService/GetMetadata", runtime.WithHTTPPathPattern("/metadata/{id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blockchain.v1.WalletService/GetMetadata", runtime.WithHTTPPathPattern("/v1/metadata/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -385,7 +385,7 @@ func RegisterWalletServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blockchain.v1.WalletService/GetSignature", runtime.WithHTTPPathPattern("/signature/{message}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blockchain.v1.WalletService/GetSignature", runtime.WithHTTPPathPattern("/v1/signature/{message}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -407,7 +407,7 @@ func RegisterWalletServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blockchain.v1.WalletService/SendTransaction", runtime.WithHTTPPathPattern("/transaction"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blockchain.v1.WalletService/SendTransaction", runtime.WithHTTPPathPattern("/v1/transaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -427,13 +427,13 @@ func RegisterWalletServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 }
 
 var (
-	pattern_WalletService_GetAddress_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"address"}, ""))
+	pattern_WalletService_GetAddress_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "address"}, ""))
 
-	pattern_WalletService_GetMetadata_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"metadata", "id"}, ""))
+	pattern_WalletService_GetMetadata_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "metadata", "id"}, ""))
 
-	pattern_WalletService_GetSignature_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"signature", "message"}, ""))
+	pattern_WalletService_GetSignature_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "signature", "message"}, ""))
 
-	pattern_WalletService_SendTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"transaction"}, ""))
+	pattern_WalletService_SendTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "transaction"}, ""))
 )
 
 var (
