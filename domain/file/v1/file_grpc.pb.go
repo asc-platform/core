@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type FileServiceClient interface {
 	UploadFile(ctx context.Context, opts ...grpc.CallOption) (FileService_UploadFileClient, error)
 	DownloadFile(ctx context.Context, in *DownloadFileRequest, opts ...grpc.CallOption) (FileService_DownloadFileClient, error)
+	GetNonce(ctx context.Context, in *GetNonceRequest, opts ...grpc.CallOption) (*GetNonceResponse, error)
 }
 
 type fileServiceClient struct {
@@ -100,12 +101,22 @@ func (x *fileServiceDownloadFileClient) Recv() (*DownloadFileResponse, error) {
 	return m, nil
 }
 
+func (c *fileServiceClient) GetNonce(ctx context.Context, in *GetNonceRequest, opts ...grpc.CallOption) (*GetNonceResponse, error) {
+	out := new(GetNonceResponse)
+	err := c.cc.Invoke(ctx, "/file.v1.FileService/GetNonce", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FileServiceServer is the server API for FileService service.
 // All implementations must embed UnimplementedFileServiceServer
 // for forward compatibility
 type FileServiceServer interface {
 	UploadFile(FileService_UploadFileServer) error
 	DownloadFile(*DownloadFileRequest, FileService_DownloadFileServer) error
+	GetNonce(context.Context, *GetNonceRequest) (*GetNonceResponse, error)
 	mustEmbedUnimplementedFileServiceServer()
 }
 
@@ -118,6 +129,9 @@ func (UnimplementedFileServiceServer) UploadFile(FileService_UploadFileServer) e
 }
 func (UnimplementedFileServiceServer) DownloadFile(*DownloadFileRequest, FileService_DownloadFileServer) error {
 	return status.Errorf(codes.Unimplemented, "method DownloadFile not implemented")
+}
+func (UnimplementedFileServiceServer) GetNonce(context.Context, *GetNonceRequest) (*GetNonceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNonce not implemented")
 }
 func (UnimplementedFileServiceServer) mustEmbedUnimplementedFileServiceServer() {}
 
@@ -179,13 +193,36 @@ func (x *fileServiceDownloadFileServer) Send(m *DownloadFileResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _FileService_GetNonce_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNonceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileServiceServer).GetNonce(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/file.v1.FileService/GetNonce",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileServiceServer).GetNonce(ctx, req.(*GetNonceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FileService_ServiceDesc is the grpc.ServiceDesc for FileService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var FileService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "file.v1.FileService",
 	HandlerType: (*FileServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetNonce",
+			Handler:    _FileService_GetNonce_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "UploadFile",

@@ -15,6 +15,9 @@
       "name": "AccountsService"
     },
     {
+      "name": "WalletService"
+    },
+    {
       "name": "FileService"
     }
   ],
@@ -28,6 +31,218 @@
     "application/json"
   ],
   "paths": {
+    "/address": {
+      "get": {
+        "operationId": "WalletService_GetAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAddressResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/v1ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "500": {
+            "description": "Server error.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "WalletService"
+        ]
+      }
+    },
+    "/metadata/{id}": {
+      "get": {
+        "operationId": "WalletService_GetMetadata",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Asset"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/v1ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "500": {
+            "description": "Server error.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WalletService"
+        ],
+        "security": []
+      }
+    },
+    "/signature/{message}": {
+      "get": {
+        "operationId": "WalletService_GetSignature",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSignatureResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/v1ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "500": {
+            "description": "Server error.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "message",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "byte"
+          }
+        ],
+        "tags": [
+          "WalletService"
+        ]
+      }
+    },
+    "/transaction": {
+      "post": {
+        "operationId": "WalletService_SendTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SendTransactionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/v1ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "500": {
+            "description": "Server error.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SendTransactionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WalletService"
+        ]
+      }
+    },
     "/v1/accounts": {
       "get": {
         "operationId": "AccountsService_ListAccounts",
@@ -391,23 +606,13 @@
         },
         "parameters": [
           {
-            "name": "metadata.filename",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "metadata.extension",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "chunkData",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "byte"
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UploadFileRequest"
+            }
           }
         ],
         "tags": [
@@ -483,6 +688,60 @@
           "FileService"
         ]
       }
+    },
+    "/v1/files/{hash}/nonce": {
+      "get": {
+        "operationId": "FileService_GetNonce",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetNonceResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/v1ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "500": {
+            "description": "Server error.",
+            "schema": {
+              "$ref": "#/definitions/protobufEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FileService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -526,6 +785,17 @@
     },
     "AccountUnspecifiedDetails": {
       "type": "object"
+    },
+    "AssetAttribute": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
     },
     "filev1Metadata": {
       "type": "object",
@@ -586,6 +856,40 @@
         }
       }
     },
+    "v1Asset": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "externalUrl": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetAttribute"
+          }
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "v1BoolResponse": {
       "type": "object",
       "properties": {
@@ -619,6 +923,32 @@
         }
       }
     },
+    "v1GetAddressResponse": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetNonceResponse": {
+      "type": "object",
+      "properties": {
+        "nonce": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1GetSignatureResponse": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "v1ListAccountsResponse": {
       "type": "object",
       "properties": {
@@ -641,6 +971,72 @@
         "ROLE_CLIENT"
       ],
       "default": "ROLE_UNSPECIFIED"
+    },
+    "v1SendTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/v1Transaction"
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "v1SendTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1Transaction": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1TransactionMetadata"
+        },
+        "contract": {
+          "type": "string"
+        },
+        "network": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1TransactionMetadata": {
+      "type": "object",
+      "properties": {
+        "hash": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reverted": {
+          "type": "string"
+        }
+      },
+      "title": "Metadata"
+    },
+    "v1UploadFileRequest": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/filev1Metadata"
+        },
+        "chunkData": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
     },
     "v1UploadFileResponse": {
       "type": "object",

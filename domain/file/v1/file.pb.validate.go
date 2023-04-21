@@ -611,3 +611,207 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DownloadFileResponseValidationError{}
+
+// Validate checks the field values on GetNonceRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetNonceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetNonceRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetNonceRequestMultiError, or nil if none found.
+func (m *GetNonceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetNonceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Hash
+
+	if len(errors) > 0 {
+		return GetNonceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetNonceRequestMultiError is an error wrapping multiple validation errors
+// returned by GetNonceRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetNonceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetNonceRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetNonceRequestMultiError) AllErrors() []error { return m }
+
+// GetNonceRequestValidationError is the validation error returned by
+// GetNonceRequest.Validate if the designated constraints aren't met.
+type GetNonceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetNonceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetNonceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetNonceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetNonceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetNonceRequestValidationError) ErrorName() string { return "GetNonceRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetNonceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetNonceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetNonceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetNonceRequestValidationError{}
+
+// Validate checks the field values on GetNonceResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetNonceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetNonceResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetNonceResponseMultiError, or nil if none found.
+func (m *GetNonceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetNonceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Nonce
+
+	if len(errors) > 0 {
+		return GetNonceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetNonceResponseMultiError is an error wrapping multiple validation errors
+// returned by GetNonceResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GetNonceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetNonceResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetNonceResponseMultiError) AllErrors() []error { return m }
+
+// GetNonceResponseValidationError is the validation error returned by
+// GetNonceResponse.Validate if the designated constraints aren't met.
+type GetNonceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetNonceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetNonceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetNonceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetNonceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetNonceResponseValidationError) ErrorName() string { return "GetNonceResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetNonceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetNonceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetNonceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetNonceResponseValidationError{}

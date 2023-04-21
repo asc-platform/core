@@ -1,5 +1,5 @@
 syntax = "proto3";
-package transaction.v1;
+package blockchain.v1;
 
 import "google/protobuf/timestamp.proto";
 

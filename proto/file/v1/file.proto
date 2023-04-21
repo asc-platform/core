@@ -12,11 +12,18 @@ message Metadata {
 
 service FileService {
   rpc UploadFile(stream UploadFileRequest) returns (UploadFileResponse) {
-    option (google.api.http) = {post: "/v1/files"};
+    option (google.api.http) = {
+      post: "/v1/files"
+      body: "*"
+    };
   }
 
   rpc DownloadFile(DownloadFileRequest) returns (stream DownloadFileResponse) {
     option (google.api.http) = {get: "/v1/files/{hash}"};
+  }
+
+  rpc GetNonce(GetNonceRequest) returns (GetNonceResponse) {
+    option (google.api.http) = {get: "/v1/files/{hash}/nonce"};
   }
 }
 
@@ -38,4 +45,12 @@ message DownloadFileRequest {
 
 message DownloadFileResponse {
   bytes chunk_data = 1;
+}
+
+message GetNonceRequest {
+  string hash = 1;
+}
+
+message GetNonceResponse {
+  int64 nonce = 1;
 }

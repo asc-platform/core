@@ -1,0 +1,56 @@
+syntax = "proto3";
+package blockchain.v1;
+
+import "blockchain/v1/asset.proto";
+import "blockchain/v1/transaction.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+service WalletService {
+  rpc GetAddress(google.protobuf.Empty) returns (GetAddressResponse) {
+    option (google.api.http) = {get: "/address"};
+  }
+
+  rpc GetMetadata(GetMetadataRequest) returns (Asset) {
+    option (google.api.http) = {get: "/metadata/{id}"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {};
+    };
+  }
+  
+  rpc GetSignature(GetSignatureRequest) returns (GetSignatureResponse) {
+    option (google.api.http) = {get: "/signature/{message}"};
+  }
+  
+  rpc SendTransaction(SendTransactionRequest) returns (SendTransactionResponse) {
+    option (google.api.http) = {
+      post: "/transaction",
+      body: "*"
+    };
+  }
+}
+
+message GetAddressResponse {
+  string address = 1;
+}
+
+message GetMetadataRequest {
+  string id = 1;
+}
+
+message GetSignatureRequest {
+  bytes message = 1;
+}
+message GetSignatureResponse {
+  bytes signature = 1;
+}
+
+message SendTransactionRequest {
+  Transaction transaction = 1;
+  repeated bytes authorizations = 2;
+}
+
+message SendTransactionResponse {
+  bool success = 1;
+}

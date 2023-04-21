@@ -1,0 +1,21 @@
+syntax = "proto3";
+package blockchain.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message Asset {
+  message Attribute {
+    string name = 1;
+    string value = 2;
+  }
+
+  string name = 1;
+  string description = 2;
+  string image = 3;
+  string external_url = 4;
+  repeated Attribute attributes = 5;
+
+  repeated bytes documents = 6;
+
+  google.protobuf.Timestamp created_at = 10;
+}
