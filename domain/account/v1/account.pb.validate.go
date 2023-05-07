@@ -168,6 +168,112 @@ var _ interface {
 	ErrorName() string
 } = AccountValidationError{}
 
+// Validate checks the field values on AccountFilter with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AccountFilter) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AccountFilter with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AccountFilterMultiError, or
+// nil if none found.
+func (m *AccountFilter) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AccountFilter) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Email
+
+	// no validation rules for Page
+
+	// no validation rules for Offset
+
+	if len(errors) > 0 {
+		return AccountFilterMultiError(errors)
+	}
+
+	return nil
+}
+
+// AccountFilterMultiError is an error wrapping multiple validation errors
+// returned by AccountFilter.ValidateAll() if the designated constraints
+// aren't met.
+type AccountFilterMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AccountFilterMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AccountFilterMultiError) AllErrors() []error { return m }
+
+// AccountFilterValidationError is the validation error returned by
+// AccountFilter.Validate if the designated constraints aren't met.
+type AccountFilterValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AccountFilterValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AccountFilterValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AccountFilterValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AccountFilterValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AccountFilterValidationError) ErrorName() string { return "AccountFilterValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AccountFilterValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAccountFilter.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AccountFilterValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AccountFilterValidationError{}
+
 // Validate checks the field values on GetAccountRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -428,6 +534,35 @@ func (m *ListAccountsRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetFilter()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAccountsRequestValidationError{
+					field:  "Filter",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAccountsRequestValidationError{
+					field:  "Filter",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFilter()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAccountsRequestValidationError{
+				field:  "Filter",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return ListAccountsRequestMultiError(errors)

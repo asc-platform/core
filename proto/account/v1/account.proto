@@ -72,6 +72,13 @@ service AccountsService {
   }
 }
 
+message AccountFilter {
+  string email = 1;
+
+  int32 page = 10;
+  int32 offset = 11;
+}
+
 message GetAccountRequest {
   string id = 1;
 }
@@ -80,7 +87,9 @@ message GetAccountResponse {
   optional Account account = 1;
 }
 
-message ListAccountsRequest {}
+message ListAccountsRequest {
+  AccountFilter filter = 1;
+}
 message ListAccountsResponse {
   repeated Account accounts = 1;
 }
