@@ -10,7 +10,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     description: "Provides webhook endpoint for services.";
     contact: {
       name: "ASC";
-      url: "https://gtihub.com/asc-audit/core";
+      url: "https://gtihub.com/asc-platform/core";
       email: "support@asc.com";
     };
   };
