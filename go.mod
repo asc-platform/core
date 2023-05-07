@@ -1,4 +1,4 @@
-module github.com/asc-audit/core
+module github.com/asc-platform/core
 
 go 1.19
 
