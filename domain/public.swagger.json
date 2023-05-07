@@ -169,8 +169,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "tags": [
@@ -222,8 +221,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "tags": [
@@ -275,8 +273,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "string"
           },
           {
             "name": "request",
@@ -338,8 +335,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "string"
           },
           {
             "name": "request",

@@ -25,8 +25,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountsServiceClient interface {
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
-	GetCurrentAccount(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAccountResponse, error)
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
+	GetCurrentAccount(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAccountResponse, error)
 	UpdateAccountDetails(ctx context.Context, in *UpdateAccountDetailsRequest, opts ...grpc.CallOption) (*v1.BoolResponse, error)
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*v1.BoolResponse, error)
 	SetAccountRole(ctx context.Context, in *SetAccountRoleRequest, opts ...grpc.CallOption) (*v1.BoolResponse, error)
@@ -49,18 +49,18 @@ func (c *accountsServiceClient) ListAccounts(ctx context.Context, in *ListAccoun
 	return out, nil
 }
 
-func (c *accountsServiceClient) GetCurrentAccount(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAccountResponse, error) {
+func (c *accountsServiceClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
 	out := new(GetAccountResponse)
-	err := c.cc.Invoke(ctx, "/account.v1.AccountsService/GetCurrentAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/account.v1.AccountsService/GetAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountsServiceClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
+func (c *accountsServiceClient) GetCurrentAccount(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAccountResponse, error) {
 	out := new(GetAccountResponse)
-	err := c.cc.Invoke(ctx, "/account.v1.AccountsService/GetAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/account.v1.AccountsService/GetCurrentAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -99,8 +99,8 @@ func (c *accountsServiceClient) SetAccountRole(ctx context.Context, in *SetAccou
 // for forward compatibility
 type AccountsServiceServer interface {
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
-	GetCurrentAccount(context.Context, *emptypb.Empty) (*GetAccountResponse, error)
 	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
+	GetCurrentAccount(context.Context, *emptypb.Empty) (*GetAccountResponse, error)
 	UpdateAccountDetails(context.Context, *UpdateAccountDetailsRequest) (*v1.BoolResponse, error)
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*v1.BoolResponse, error)
 	SetAccountRole(context.Context, *SetAccountRoleRequest) (*v1.BoolResponse, error)
@@ -114,11 +114,11 @@ type UnimplementedAccountsServiceServer struct {
 func (UnimplementedAccountsServiceServer) ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccounts not implemented")
 }
-func (UnimplementedAccountsServiceServer) GetCurrentAccount(context.Context, *emptypb.Empty) (*GetAccountResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentAccount not implemented")
-}
 func (UnimplementedAccountsServiceServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
+}
+func (UnimplementedAccountsServiceServer) GetCurrentAccount(context.Context, *emptypb.Empty) (*GetAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentAccount not implemented")
 }
 func (UnimplementedAccountsServiceServer) UpdateAccountDetails(context.Context, *UpdateAccountDetailsRequest) (*v1.BoolResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountDetails not implemented")
@@ -160,24 +160,6 @@ func _AccountsService_ListAccounts_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountsService_GetCurrentAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountsServiceServer).GetCurrentAccount(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/account.v1.AccountsService/GetCurrentAccount",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServiceServer).GetCurrentAccount(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AccountsService_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAccountRequest)
 	if err := dec(in); err != nil {
@@ -192,6 +174,24 @@ func _AccountsService_GetAccount_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountsServiceServer).GetAccount(ctx, req.(*GetAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountsService_GetCurrentAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).GetCurrentAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.v1.AccountsService/GetCurrentAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).GetCurrentAccount(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -262,12 +262,12 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AccountsService_ListAccounts_Handler,
 		},
 		{
-			MethodName: "GetCurrentAccount",
-			Handler:    _AccountsService_GetCurrentAccount_Handler,
-		},
-		{
 			MethodName: "GetAccount",
 			Handler:    _AccountsService_GetAccount_Handler,
+		},
+		{
+			MethodName: "GetCurrentAccount",
+			Handler:    _AccountsService_GetCurrentAccount_Handler,
 		},
 		{
 			MethodName: "UpdateAccountDetails",

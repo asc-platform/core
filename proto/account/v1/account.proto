@@ -44,12 +44,12 @@ service AccountsService {
     option (google.api.http) = {get: "/v1/accounts"};
   }
 
-  rpc GetCurrentAccount(google.protobuf.Empty) returns (GetAccountResponse) {
-    option (google.api.http) = {get: "/v1/accounts/me"};
-  }
-
   rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
     option (google.api.http) = {get: "/v1/accounts/{id}"};
+  }
+
+  rpc GetCurrentAccount(google.protobuf.Empty) returns (GetAccountResponse) {
+    option (google.api.http) = {get: "/v1/accounts/me"};
   }
 
   rpc UpdateAccountDetails(UpdateAccountDetailsRequest) returns (common.v1.BoolResponse) {
@@ -72,7 +72,7 @@ service AccountsService {
 }
 
 message GetAccountRequest {
-  int64 id = 1;
+  string id = 1;
 }
 
 message GetAccountResponse {
@@ -85,15 +85,15 @@ message ListAccountsResponse {
 }
 
 message UpdateAccountDetailsRequest {
-  int64 id = 1;
+  string id = 1;
   Account.Details request = 2;
 }
 
 message DeleteAccountRequest {
-  int64 id = 1;
+  string id = 1;
 }
 
 message SetAccountRoleRequest {
-  int64 id = 1;
+  string id = 1;
   Role request = 2;
 }
