@@ -72,7 +72,7 @@ service AccountsService {
 }
 
 message GetAccountRequest {
-  string id = 1;
+  int64 id = 1;
 }
 
 message GetAccountResponse {
@@ -85,15 +85,15 @@ message ListAccountsResponse {
 }
 
 message UpdateAccountDetailsRequest {
-  string id = 1;
+  int64 id = 1;
   Account.Details request = 2;
 }
 
 message DeleteAccountRequest {
-  string id = 1;
+  int64 id = 1;
 }
 
 message SetAccountRoleRequest {
-  string id = 1;
+  int64 id = 1;
   Role request = 2;
 }
