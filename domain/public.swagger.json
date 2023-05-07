@@ -845,6 +845,9 @@
     "v1Account": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
         },

@@ -56,6 +56,8 @@ func (m *Account) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
 	// no validation rules for Email
 
 	// no validation rules for Role

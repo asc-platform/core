@@ -34,9 +34,10 @@ message Account {
     }
   }
 
-  string email = 1;
-  Role role = 2;
-  Details details = 3;
+  string id = 1;
+  string email = 2;
+  Role role = 3;
+  Details details = 4;
 }
 
 service AccountsService {
