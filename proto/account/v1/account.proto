@@ -65,10 +65,6 @@ message Account {
 }
 
 service AccountsService {
-  rpc Health(google.protobuf.Empty) returns (common.v1.BoolResponse) {
-    option (google.api.http) = {get: "/v1/accounts/health"};
-  }
-
   rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
     option (google.api.http) = {get: "/v1/accounts"};
   }
@@ -97,6 +93,10 @@ service AccountsService {
       post: "/v1/accounts/{id}/role"
       body: "request"
     };
+  }
+
+  rpc Health(google.protobuf.Empty) returns (common.v1.BoolResponse) {
+    option (google.api.http) = {get: "/v1/accounts/health"};
   }
 }
 
