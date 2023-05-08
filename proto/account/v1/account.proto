@@ -15,13 +15,37 @@ enum Role {
   ROLE_CLIENT = 5;
 }
 
+enum Gender {
+  GENDER_UNSPECIFIED = 0;
+  GENDER_MALE = 1;
+  GENDER_FEMALE = 2;
+}
+
+enum MaritalStatus {
+  MARITAL_STATUS_UNSPECIFIED = 0;
+}
+
+enum Occupation {
+  OCCUPATION_UNSPECIFIED = 0;
+}
+
 message Account {
   message UnspecifiedDetails {}
   message AdminDetails {}
   message ManagerDetails {}
   message LawyerDetails {}
   message JudgeDetails {}
-  message ClientDetails {}
+  message ClientDetails {
+    string first_name = 1;
+    string last_name = 2;
+    Gender gender = 3;
+    MaritalStatus marital_status = 4;
+    Occupation occupation = 5;
+    string address = 6;
+    string nationality = 7;
+    string phone_number = 8;
+    string isapres = 9;
+  }
 
   message Details {
     oneof details {
@@ -73,10 +97,10 @@ service AccountsService {
 }
 
 message AccountFilter {
-  string email = 1;
+  optional string email = 1;
 
-  int32 page = 10;
-  int32 offset = 11;
+  optional int32 page = 10;
+  optional int32 offset = 11;
 }
 
 message GetAccountRequest {

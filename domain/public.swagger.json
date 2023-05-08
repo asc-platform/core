@@ -771,7 +771,36 @@
       "type": "object"
     },
     "AccountClientDetails": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "gender": {
+          "$ref": "#/definitions/v1Gender"
+        },
+        "maritalStatus": {
+          "$ref": "#/definitions/v1MaritalStatus"
+        },
+        "occupation": {
+          "$ref": "#/definitions/v1Occupation"
+        },
+        "address": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "isapres": {
+          "type": "string"
+        }
+      }
     },
     "AccountDetails": {
       "type": "object",
@@ -956,6 +985,15 @@
         }
       }
     },
+    "v1Gender": {
+      "type": "string",
+      "enum": [
+        "GENDER_UNSPECIFIED",
+        "GENDER_MALE",
+        "GENDER_FEMALE"
+      ],
+      "default": "GENDER_UNSPECIFIED"
+    },
     "v1GetAccountResponse": {
       "type": "object",
       "properties": {
@@ -1000,6 +1038,20 @@
           }
         }
       }
+    },
+    "v1MaritalStatus": {
+      "type": "string",
+      "enum": [
+        "MARITAL_STATUS_UNSPECIFIED"
+      ],
+      "default": "MARITAL_STATUS_UNSPECIFIED"
+    },
+    "v1Occupation": {
+      "type": "string",
+      "enum": [
+        "OCCUPATION_UNSPECIFIED"
+      ],
+      "default": "OCCUPATION_UNSPECIFIED"
     },
     "v1Role": {
       "type": "string",

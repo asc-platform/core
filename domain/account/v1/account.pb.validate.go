@@ -190,11 +190,17 @@ func (m *AccountFilter) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Email
+	if m.Email != nil {
+		// no validation rules for Email
+	}
 
-	// no validation rules for Page
+	if m.Page != nil {
+		// no validation rules for Page
+	}
 
-	// no validation rules for Offset
+	if m.Offset != nil {
+		// no validation rules for Offset
+	}
 
 	if len(errors) > 0 {
 		return AccountFilterMultiError(errors)
@@ -1655,6 +1661,24 @@ func (m *Account_ClientDetails) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for FirstName
+
+	// no validation rules for LastName
+
+	// no validation rules for Gender
+
+	// no validation rules for MaritalStatus
+
+	// no validation rules for Occupation
+
+	// no validation rules for Address
+
+	// no validation rules for Nationality
+
+	// no validation rules for PhoneNumber
+
+	// no validation rules for Isapres
 
 	if len(errors) > 0 {
 		return Account_ClientDetailsMultiError(errors)
