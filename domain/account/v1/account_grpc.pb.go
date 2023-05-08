@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountsServiceClient interface {
+	Health(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.BoolResponse, error)
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
 	GetCurrentAccount(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAccountResponse, error)
@@ -38,6 +39,15 @@ type accountsServiceClient struct {
 
 func NewAccountsServiceClient(cc grpc.ClientConnInterface) AccountsServiceClient {
 	return &accountsServiceClient{cc}
+}
+
+func (c *accountsServiceClient) Health(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.BoolResponse, error) {
+	out := new(v1.BoolResponse)
+	err := c.cc.Invoke(ctx, "/account.v1.AccountsService/Health", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *accountsServiceClient) ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error) {
@@ -98,6 +108,7 @@ func (c *accountsServiceClient) SetAccountRole(ctx context.Context, in *SetAccou
 // All implementations must embed UnimplementedAccountsServiceServer
 // for forward compatibility
 type AccountsServiceServer interface {
+	Health(context.Context, *emptypb.Empty) (*v1.BoolResponse, error)
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
 	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
 	GetCurrentAccount(context.Context, *emptypb.Empty) (*GetAccountResponse, error)
@@ -111,6 +122,9 @@ type AccountsServiceServer interface {
 type UnimplementedAccountsServiceServer struct {
 }
 
+func (UnimplementedAccountsServiceServer) Health(context.Context, *emptypb.Empty) (*v1.BoolResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Health not implemented")
+}
 func (UnimplementedAccountsServiceServer) ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccounts not implemented")
 }
@@ -140,6 +154,24 @@ type UnsafeAccountsServiceServer interface {
 
 func RegisterAccountsServiceServer(s grpc.ServiceRegistrar, srv AccountsServiceServer) {
 	s.RegisterService(&AccountsService_ServiceDesc, srv)
+}
+
+func _AccountsService_Health_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).Health(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.v1.AccountsService/Health",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).Health(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _AccountsService_ListAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -257,6 +289,10 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "account.v1.AccountsService",
 	HandlerType: (*AccountsServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Health",
+			Handler:    _AccountsService_Health_Handler,
+		},
 		{
 			MethodName: "ListAccounts",
 			Handler:    _AccountsService_ListAccounts_Handler,
