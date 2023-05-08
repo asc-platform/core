@@ -84,14 +84,14 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "format": "int64"
+            "format": "uint64"
           },
           {
             "name": "filter.offset",
             "in": "query",
             "required": false,
             "type": "string",
-            "format": "int64"
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -918,11 +918,11 @@
         },
         "limit": {
           "type": "string",
-          "format": "int64"
+          "format": "uint64"
         },
         "offset": {
           "type": "string",
-          "format": "int64"
+          "format": "uint64"
         }
       }
     },
