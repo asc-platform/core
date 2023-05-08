@@ -99,8 +99,8 @@ service AccountsService {
 message AccountFilter {
   optional string email = 1;
 
-  optional int32 limit = 10;
-  optional int32 offset = 11;
+  optional int64 limit = 10;
+  optional int64 offset = 11;
 }
 
 message GetAccountRequest {
