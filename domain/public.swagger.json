@@ -80,7 +80,7 @@
             "type": "string"
           },
           {
-            "name": "filter.page",
+            "name": "filter.limit",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -916,7 +916,7 @@
         "email": {
           "type": "string"
         },
-        "page": {
+        "limit": {
           "type": "integer",
           "format": "int32"
         },

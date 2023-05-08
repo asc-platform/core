@@ -194,8 +194,8 @@ func (m *AccountFilter) validate(all bool) error {
 		// no validation rules for Email
 	}
 
-	if m.Page != nil {
-		// no validation rules for Page
+	if m.Limit != nil {
+		// no validation rules for Limit
 	}
 
 	if m.Offset != nil {
