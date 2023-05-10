@@ -1,5 +1,5 @@
 syntax = "proto3";
-package common.v1;
+package event.v1;
 
 import "account/v1/account.proto";
 
