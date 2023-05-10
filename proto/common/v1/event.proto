@@ -1,0 +1,14 @@
+syntax = "proto3";
+package common.v1;
+
+import "account/v1/account.proto";
+
+enum Event {
+  EVENT_UNSPECIFIED = 0;
+  EVENT_ACCOUNT_UPDATED = 1;
+}
+
+message AccountUpdatePayload {
+  string id = 1;
+  account.v1.Account.Details details = 2;
+}
