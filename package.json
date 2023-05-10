@@ -1,6 +1,6 @@
 {
   "name": "audit-core",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "main": "index.js",
   "repository": "git@github.com:asc-platform/core.git",
   "author": "Amaury Diaz <amauryuh@gmail.com>",

@@ -3,9 +3,9 @@ package event.v1;
 
 import "account/v1/account.proto";
 
-enum Event {
-  EVENT_UNSPECIFIED = 0;
-  EVENT_ACCOUNT_UPDATED = 1;
+enum Topic {
+  TOPIC_UNSPECIFIED = 0;
+  TOPIC_ACCOUNT_UPDATED = 1;
 }
 
 message AccountUpdatePayload {
