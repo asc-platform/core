@@ -23,10 +23,31 @@ enum Gender {
 
 enum MaritalStatus {
   MARITAL_STATUS_UNSPECIFIED = 0;
+  MARITAL_STATUS_SINGLE = 1;
+  MARITAL_STATUS_MARRIED = 2;
+  MARITAL_STATUS_WIDOWED = 3;
+  MARITAL_STATUS_SEPARATED = 4;
+  MARITAL_STATUS_DIVORCED = 5;
 }
 
-enum Occupation {
-  OCCUPATION_UNSPECIFIED = 0;
+enum Region {
+  REGION_UNSPECIFIED = 0;
+  REGION_METROPOLITANA_SANTIAGO = 2;
+  REGION_ARICA_PARINACOTA = 3;
+  REGION_TARAPACA = 4;
+  REGION_ANTOFAGASTA = 5;
+  REGION_ATACAMA = 6;
+  REGION_COQUIMBO = 7;
+  REGION_VALPARAISO = 8;
+  REGION_LIBERTADOR_GENERAL_BERNARDO_O_HIGGINS = 9;
+  REGION_MAULE = 10;
+  REGION_NUBLE = 11;
+  REGION_BIOBIO = 12;
+  REGION_LA_ARAUCANIA = 13;
+  REGION_LOS_RIOS = 14;
+  REGION_LOS_LAGOS = 15;
+  REGION_AYSEN_CARLOS_IBANEZ_DEL_CAMPO = 16;
+  REGION_MAGALLANES_ANTARTICA_CHILENA = 17;
 }
 
 message Account {
@@ -38,13 +59,18 @@ message Account {
   message ClientDetails {
     string firstName = 1;
     string lastName = 2;
-    Gender gender = 3;
-    MaritalStatus maritalStatus = 4;
-    Occupation occupation = 5;
-    string address = 6;
-    string nationality = 7;
-    string phoneNumber = 8;
-    string isapres = 9;
+    string rut = 3;
+    Gender gender = 4;
+    MaritalStatus maritalStatus = 5;
+    string occupation = 6;
+    string street = 7;
+    string number = 8;
+    optional string appartment = 9;
+    Region region = 10;
+    string commune = 11;
+    string nationality = 12;
+    string phoneNumber = 13;
+    string isapres = 14;
   }
 
   message Details {

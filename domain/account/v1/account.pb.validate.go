@@ -1666,19 +1666,31 @@ func (m *Account_ClientDetails) validate(all bool) error {
 
 	// no validation rules for LastName
 
+	// no validation rules for Rut
+
 	// no validation rules for Gender
 
 	// no validation rules for MaritalStatus
 
 	// no validation rules for Occupation
 
-	// no validation rules for Address
+	// no validation rules for Street
+
+	// no validation rules for Number
+
+	// no validation rules for Region
+
+	// no validation rules for Commune
 
 	// no validation rules for Nationality
 
 	// no validation rules for PhoneNumber
 
 	// no validation rules for Isapres
+
+	if m.Appartment != nil {
+		// no validation rules for Appartment
+	}
 
 	if len(errors) > 0 {
 		return Account_ClientDetailsMultiError(errors)

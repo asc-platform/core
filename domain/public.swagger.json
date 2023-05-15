@@ -825,6 +825,9 @@
         "lastName": {
           "type": "string"
         },
+        "rut": {
+          "type": "string"
+        },
         "gender": {
           "$ref": "#/definitions/v1Gender"
         },
@@ -832,9 +835,21 @@
           "$ref": "#/definitions/v1MaritalStatus"
         },
         "occupation": {
-          "$ref": "#/definitions/v1Occupation"
+          "type": "string"
         },
-        "address": {
+        "street": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "appartment": {
+          "type": "string"
+        },
+        "region": {
+          "$ref": "#/definitions/v1Region"
+        },
+        "commune": {
           "type": "string"
         },
         "nationality": {
@@ -1088,16 +1103,37 @@
     "v1MaritalStatus": {
       "type": "string",
       "enum": [
-        "MARITAL_STATUS_UNSPECIFIED"
+        "MARITAL_STATUS_UNSPECIFIED",
+        "MARITAL_STATUS_SINGLE",
+        "MARITAL_STATUS_MARRIED",
+        "MARITAL_STATUS_WIDOWED",
+        "MARITAL_STATUS_SEPARATED",
+        "MARITAL_STATUS_DIVORCED"
       ],
       "default": "MARITAL_STATUS_UNSPECIFIED"
     },
-    "v1Occupation": {
+    "v1Region": {
       "type": "string",
       "enum": [
-        "OCCUPATION_UNSPECIFIED"
+        "REGION_UNSPECIFIED",
+        "REGION_METROPOLITANA_SANTIAGO",
+        "REGION_ARICA_PARINACOTA",
+        "REGION_TARAPACA",
+        "REGION_ANTOFAGASTA",
+        "REGION_ATACAMA",
+        "REGION_COQUIMBO",
+        "REGION_VALPARAISO",
+        "REGION_LIBERTADOR_GENERAL_BERNARDO_O_HIGGINS",
+        "REGION_MAULE",
+        "REGION_NUBLE",
+        "REGION_BIOBIO",
+        "REGION_LA_ARAUCANIA",
+        "REGION_LOS_RIOS",
+        "REGION_LOS_LAGOS",
+        "REGION_AYSEN_CARLOS_IBANEZ_DEL_CAMPO",
+        "REGION_MAGALLANES_ANTARTICA_CHILENA"
       ],
-      "default": "OCCUPATION_UNSPECIFIED"
+      "default": "REGION_UNSPECIFIED"
     },
     "v1Role": {
       "type": "string",
