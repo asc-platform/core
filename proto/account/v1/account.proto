@@ -64,8 +64,8 @@ message Account {
     MaritalStatus maritalStatus = 5;
     string occupation = 6;
     string street = 7;
-    string number = 8;
-    optional string appartment = 9;
+    string streetNumber = 8;
+    optional string apartmentNumber = 9;
     Region region = 10;
     string commune = 11;
     string nationality = 12;

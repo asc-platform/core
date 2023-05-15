@@ -840,10 +840,10 @@
         "street": {
           "type": "string"
         },
-        "number": {
+        "streetNumber": {
           "type": "string"
         },
-        "appartment": {
+        "apartmentNumber": {
           "type": "string"
         },
         "region": {

@@ -1676,7 +1676,7 @@ func (m *Account_ClientDetails) validate(all bool) error {
 
 	// no validation rules for Street
 
-	// no validation rules for Number
+	// no validation rules for StreetNumber
 
 	// no validation rules for Region
 
@@ -1688,8 +1688,8 @@ func (m *Account_ClientDetails) validate(all bool) error {
 
 	// no validation rules for Isapres
 
-	if m.Appartment != nil {
-		// no validation rules for Appartment
+	if m.ApartmentNumber != nil {
+		// no validation rules for ApartmentNumber
 	}
 
 	if len(errors) > 0 {
