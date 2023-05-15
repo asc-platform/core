@@ -36,25 +36,25 @@ message Account {
   message LawyerDetails {}
   message JudgeDetails {}
   message ClientDetails {
-    string first_name = 1;
-    string last_name = 2;
+    string firstName = 1;
+    string lastName = 2;
     Gender gender = 3;
-    MaritalStatus marital_status = 4;
+    MaritalStatus maritalStatus = 4;
     Occupation occupation = 5;
     string address = 6;
     string nationality = 7;
-    string phone_number = 8;
+    string phoneNumber = 8;
     string isapres = 9;
   }
 
   message Details {
     oneof details {
-      UnspecifiedDetails unspecified_details = 1;
-      AdminDetails admin_details = 2;
-      ManagerDetails manager_details = 3;
-      LawyerDetails lawyer_details = 4;
-      JudgeDetails judge_details = 5;
-      ClientDetails client_details = 6;
+      UnspecifiedDetails unspecifiedDetails = 1;
+      AdminDetails adminDetails = 2;
+      ManagerDetails managerDetails = 3;
+      LawyerDetails lawyerDetails = 4;
+      JudgeDetails judgeDetails = 5;
+      ClientDetails clientDetails = 6;
     }
   }
 
