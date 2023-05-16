@@ -847,7 +847,7 @@
           "type": "string"
         },
         "region": {
-          "$ref": "#/definitions/v1Region"
+          "type": "string"
         },
         "commune": {
           "type": "string"
@@ -1111,29 +1111,6 @@
         "MARITAL_STATUS_DIVORCED"
       ],
       "default": "MARITAL_STATUS_UNSPECIFIED"
-    },
-    "v1Region": {
-      "type": "string",
-      "enum": [
-        "REGION_UNSPECIFIED",
-        "REGION_METROPOLITANA_SANTIAGO",
-        "REGION_ARICA_PARINACOTA",
-        "REGION_TARAPACA",
-        "REGION_ANTOFAGASTA",
-        "REGION_ATACAMA",
-        "REGION_COQUIMBO",
-        "REGION_VALPARAISO",
-        "REGION_LIBERTADOR_GENERAL_BERNARDO_O_HIGGINS",
-        "REGION_MAULE",
-        "REGION_NUBLE",
-        "REGION_BIOBIO",
-        "REGION_LA_ARAUCANIA",
-        "REGION_LOS_RIOS",
-        "REGION_LOS_LAGOS",
-        "REGION_AYSEN_CARLOS_IBANEZ_DEL_CAMPO",
-        "REGION_MAGALLANES_ANTARTICA_CHILENA"
-      ],
-      "default": "REGION_UNSPECIFIED"
     },
     "v1Role": {
       "type": "string",

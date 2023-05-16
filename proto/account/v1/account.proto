@@ -30,26 +30,6 @@ enum MaritalStatus {
   MARITAL_STATUS_DIVORCED = 5;
 }
 
-enum Region {
-  REGION_UNSPECIFIED = 0;
-  REGION_METROPOLITANA_SANTIAGO = 2;
-  REGION_ARICA_PARINACOTA = 3;
-  REGION_TARAPACA = 4;
-  REGION_ANTOFAGASTA = 5;
-  REGION_ATACAMA = 6;
-  REGION_COQUIMBO = 7;
-  REGION_VALPARAISO = 8;
-  REGION_LIBERTADOR_GENERAL_BERNARDO_O_HIGGINS = 9;
-  REGION_MAULE = 10;
-  REGION_NUBLE = 11;
-  REGION_BIOBIO = 12;
-  REGION_LA_ARAUCANIA = 13;
-  REGION_LOS_RIOS = 14;
-  REGION_LOS_LAGOS = 15;
-  REGION_AYSEN_CARLOS_IBANEZ_DEL_CAMPO = 16;
-  REGION_MAGALLANES_ANTARTICA_CHILENA = 17;
-}
-
 message Account {
   message UnspecifiedDetails {}
   message AdminDetails {}
@@ -66,7 +46,7 @@ message Account {
     string street = 7;
     string streetNumber = 8;
     optional string apartmentNumber = 9;
-    Region region = 10;
+    string region = 10;
     string commune = 11;
     string nationality = 12;
     string phoneNumber = 13;
