@@ -819,10 +819,10 @@
     "AccountClientDetails": {
       "type": "object",
       "properties": {
-        "firstName": {
+        "first_name": {
           "type": "string"
         },
-        "lastName": {
+        "last_name": {
           "type": "string"
         },
         "rut": {
@@ -831,7 +831,7 @@
         "gender": {
           "$ref": "#/definitions/v1Gender"
         },
-        "maritalStatus": {
+        "marital_status": {
           "$ref": "#/definitions/v1MaritalStatus"
         },
         "occupation": {
@@ -840,10 +840,10 @@
         "street": {
           "type": "string"
         },
-        "streetNumber": {
+        "street_number": {
           "type": "string"
         },
-        "apartmentNumber": {
+        "apartment_number": {
           "type": "string"
         },
         "region": {
@@ -855,7 +855,7 @@
         "nationality": {
           "type": "string"
         },
-        "phoneNumber": {
+        "phone_number": {
           "type": "string"
         },
         "isapres": {
@@ -866,22 +866,22 @@
     "AccountDetails": {
       "type": "object",
       "properties": {
-        "unspecifiedDetails": {
+        "unspecified_details": {
           "$ref": "#/definitions/AccountUnspecifiedDetails"
         },
-        "adminDetails": {
+        "admin_details": {
           "$ref": "#/definitions/AccountAdminDetails"
         },
-        "managerDetails": {
+        "manager_details": {
           "$ref": "#/definitions/AccountManagerDetails"
         },
-        "lawyerDetails": {
+        "lawyer_details": {
           "$ref": "#/definitions/AccountLawyerDetails"
         },
-        "judgeDetails": {
+        "judge_details": {
           "$ref": "#/definitions/AccountJudgeDetails"
         },
-        "clientDetails": {
+        "client_details": {
           "$ref": "#/definitions/AccountClientDetails"
         }
       }
