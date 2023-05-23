@@ -31,11 +31,26 @@ enum MaritalStatus {
 }
 
 message Account {
-  message UnspecifiedDetails {}
-  message AdminDetails {}
-  message ManagerDetails {}
-  message LawyerDetails {}
-  message JudgeDetails {}
+  message UnspecifiedDetails {
+    string first_name = 1 [json_name = "first_name"];
+    string last_name = 2 [json_name = "last_name"];
+  }
+  message AdminDetails {
+    string first_name = 1 [json_name = "first_name"];
+    string last_name = 2 [json_name = "last_name"];
+  }
+  message ManagerDetails {
+    string first_name = 1 [json_name = "first_name"];
+    string last_name = 2 [json_name = "last_name"];
+  }
+  message LawyerDetails {
+    string first_name = 1 [json_name = "first_name"];
+    string last_name = 2 [json_name = "last_name"];
+  }
+  message JudgeDetails {
+    string first_name = 1 [json_name = "first_name"];
+    string last_name = 2 [json_name = "last_name"];
+  }
   message ClientDetails {
     string first_name = 1 [json_name = "first_name"];
     string last_name = 2 [json_name = "last_name"];

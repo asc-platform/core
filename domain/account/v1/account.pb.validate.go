@@ -1152,6 +1152,10 @@ func (m *Account_UnspecifiedDetails) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for FirstName
+
+	// no validation rules for LastName
+
 	if len(errors) > 0 {
 		return Account_UnspecifiedDetailsMultiError(errors)
 	}
@@ -1253,6 +1257,10 @@ func (m *Account_AdminDetails) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for FirstName
+
+	// no validation rules for LastName
 
 	if len(errors) > 0 {
 		return Account_AdminDetailsMultiError(errors)
@@ -1356,6 +1364,10 @@ func (m *Account_ManagerDetails) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for FirstName
+
+	// no validation rules for LastName
+
 	if len(errors) > 0 {
 		return Account_ManagerDetailsMultiError(errors)
 	}
@@ -1458,6 +1470,10 @@ func (m *Account_LawyerDetails) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for FirstName
+
+	// no validation rules for LastName
+
 	if len(errors) > 0 {
 		return Account_LawyerDetailsMultiError(errors)
 	}
@@ -1559,6 +1575,10 @@ func (m *Account_JudgeDetails) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for FirstName
+
+	// no validation rules for LastName
 
 	if len(errors) > 0 {
 		return Account_JudgeDetailsMultiError(errors)

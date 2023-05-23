@@ -814,7 +814,15 @@
   },
   "definitions": {
     "AccountAdminDetails": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
     },
     "AccountClientDetails": {
       "type": "object",
@@ -887,16 +895,48 @@
       }
     },
     "AccountJudgeDetails": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
     },
     "AccountLawyerDetails": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
     },
     "AccountManagerDetails": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
     },
     "AccountUnspecifiedDetails": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
     },
     "AssetAttribute": {
       "type": "object",
