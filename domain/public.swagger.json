@@ -302,7 +302,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1BoolResponse"
+              "$ref": "#/definitions/v1UpdateAccountDetailsResponse"
             }
           },
           "400": {
@@ -1217,6 +1217,14 @@
         }
       },
       "title": "Metadata"
+    },
+    "v1UpdateAccountDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v1Account"
+        }
+      }
     },
     "v1UploadFileRequest": {
       "type": "object",

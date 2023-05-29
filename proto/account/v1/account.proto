@@ -98,7 +98,7 @@ service AccountsService {
     option (google.api.http) = {get: "/v1/accounts/me"};
   }
 
-  rpc UpdateAccountDetails(UpdateAccountDetailsRequest) returns (common.v1.BoolResponse) {
+  rpc UpdateAccountDetails(UpdateAccountDetailsRequest) returns (UpdateAccountDetailsResponse) {
     option (google.api.http) = {
       put: "/v1/accounts/{id}"
       body: "request"
@@ -146,6 +146,10 @@ message ListAccountsResponse {
 message UpdateAccountDetailsRequest {
   string id = 1;
   Account.Details request = 2;
+}
+
+message UpdateAccountDetailsResponse {
+  Account account = 1;
 }
 
 message DeleteAccountRequest {

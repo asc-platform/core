@@ -27,7 +27,7 @@ type AccountsServiceClient interface {
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
 	GetCurrentAccount(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAccountResponse, error)
-	UpdateAccountDetails(ctx context.Context, in *UpdateAccountDetailsRequest, opts ...grpc.CallOption) (*v1.BoolResponse, error)
+	UpdateAccountDetails(ctx context.Context, in *UpdateAccountDetailsRequest, opts ...grpc.CallOption) (*UpdateAccountDetailsResponse, error)
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*v1.BoolResponse, error)
 	SetAccountRole(ctx context.Context, in *SetAccountRoleRequest, opts ...grpc.CallOption) (*v1.BoolResponse, error)
 	Health(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.BoolResponse, error)
@@ -68,8 +68,8 @@ func (c *accountsServiceClient) GetCurrentAccount(ctx context.Context, in *empty
 	return out, nil
 }
 
-func (c *accountsServiceClient) UpdateAccountDetails(ctx context.Context, in *UpdateAccountDetailsRequest, opts ...grpc.CallOption) (*v1.BoolResponse, error) {
-	out := new(v1.BoolResponse)
+func (c *accountsServiceClient) UpdateAccountDetails(ctx context.Context, in *UpdateAccountDetailsRequest, opts ...grpc.CallOption) (*UpdateAccountDetailsResponse, error) {
+	out := new(UpdateAccountDetailsResponse)
 	err := c.cc.Invoke(ctx, "/account.v1.AccountsService/UpdateAccountDetails", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -111,7 +111,7 @@ type AccountsServiceServer interface {
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
 	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
 	GetCurrentAccount(context.Context, *emptypb.Empty) (*GetAccountResponse, error)
-	UpdateAccountDetails(context.Context, *UpdateAccountDetailsRequest) (*v1.BoolResponse, error)
+	UpdateAccountDetails(context.Context, *UpdateAccountDetailsRequest) (*UpdateAccountDetailsResponse, error)
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*v1.BoolResponse, error)
 	SetAccountRole(context.Context, *SetAccountRoleRequest) (*v1.BoolResponse, error)
 	Health(context.Context, *emptypb.Empty) (*v1.BoolResponse, error)
@@ -131,7 +131,7 @@ func (UnimplementedAccountsServiceServer) GetAccount(context.Context, *GetAccoun
 func (UnimplementedAccountsServiceServer) GetCurrentAccount(context.Context, *emptypb.Empty) (*GetAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentAccount not implemented")
 }
-func (UnimplementedAccountsServiceServer) UpdateAccountDetails(context.Context, *UpdateAccountDetailsRequest) (*v1.BoolResponse, error) {
+func (UnimplementedAccountsServiceServer) UpdateAccountDetails(context.Context, *UpdateAccountDetailsRequest) (*UpdateAccountDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountDetails not implemented")
 }
 func (UnimplementedAccountsServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*v1.BoolResponse, error) {
